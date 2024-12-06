@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: frankgallo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: frankgallosanchez23/backendtaller:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: database-credentials
+              key: DATABASE_URL
+        - name: DATABASE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: database-credentials
+              key: DATABASE_USERNAME
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: database-credentials
+              key: DATABASE_PASSWORD
