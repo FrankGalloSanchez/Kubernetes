@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: dannalopez
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: dannalopez/projectciclodevida:frontend.v2
+          ports:
+            - containerPort: 4200
+          env:
+            - name: API_BACKEND
+              valueFrom:
+                secretKeyRef:
+                  name: database-credentials
+                  key: API_BACKEND

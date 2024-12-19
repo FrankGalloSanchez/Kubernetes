@@ -1,0 +1,14 @@
+# kubectl apply -f service.yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: ciclo-de-vida-be
+  namespace: dannalopez
+spec:
+  type: NodePort      
+  ports:
+  - port: 30001     
+    targetPort: 8085  
+    nodePort: 30001
+  selector:
+    app: ciclo-de-vida-be 
