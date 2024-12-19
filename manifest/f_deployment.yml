@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: dannalopez/projectciclodevida:frontend.v2
+          image: dannalopez/projectciclodevida:fe
           ports:
             - containerPort: 4200
           env:
